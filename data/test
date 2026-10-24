@@ -1,0 +1,96 @@
+\begin{center}
+	\begin{tabular}{| c | c c |} 
+		\hline
+		Algorithm & Overhead [\%] & C/P Speedup \\ 
+		\hline\hline
+		AMP10C  & 0.586 - 7.756 & - \\
+		AMP10P  & 0.504 - 6.211 & 1.16 - 1.25 \\
+		\hline
+		AMP20C  & 0.259 - 3.800 & - \\
+		AMP20P  & 0.245 - 3.540 & 1.06 - 1.07 \\
+		\hline
+		AMP50C  & 0.098 - 1.606 & - \\
+		AMP50P  & 0.104 - 1.349 & 0.94 - 1.19 \\
+		\hline
+		AMP100C & 0.052 - 0.847 & - \\
+		AMP100P & 0.050 - 0.663 & 1.05 - 1.27 \\
+		\hline		
+	\end{tabular}
+	\label{tab:overhead-absolute}
+\end{center}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[overhead plot,	ylabel = {Absolute Time [\si{\ms}]}]
+			\addplot+[color=OrangeRed,   solid,  mark=o]          table[x=threads,y=AMP10C]  {data/abs/run_thread_abs.dat};
+			\addplot+[color=OrangeRed,   dashed, mark=triangle*]  table[x=threads,y=AMP10P]  {data/abs/run_thread_abs.dat};
+			\addplot+[color=ForestGreen, solid,  mark=o]          table[x=threads,y=AMP20C]  {data/abs/run_thread_abs.dat};
+			\addplot+[color=ForestGreen, dashed, mark=triangle*]  table[x=threads,y=AMP20P]  {data/abs/run_thread_abs.dat};
+			\addplot+[color=Cerulean,    solid,  mark=o]          table[x=threads,y=AMP50C]  {data/abs/run_thread_abs.dat};
+			\addplot+[color=Cerulean,    dashed, mark=triangle*]  table[x=threads,y=AMP50P]  {data/abs/run_thread_abs.dat};
+			\addplot+[color=Plum,        solid,  mark=o]          table[x=threads,y=AMP100C] {data/abs/run_thread_abs.dat};
+			\addplot+[color=Plum,        dashed, mark=triangle*]  table[x=threads,y=AMP100P] {data/abs/run_thread_abs.dat};
+			
+			\legend{AMP10C, AMP10P, AMP20C, AMP20P, AMP50C, AMP50P, AMP100C, AMP100P}
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Absolute \texttt{run\_thread()} overhead during \SI{100}{\second} period.}
+	\label{fig:run-thread-abs}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[overhead plot,	ylabel = {Absolute Time [\si{\second}]}]
+			\addplot+[color=OrangeRed,   solid,  mark=o]          table[x=threads,y=AMP10C]  {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=OrangeRed,   dashed, mark=triangle*]  table[x=threads,y=AMP10P]  {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=ForestGreen, solid,  mark=o]          table[x=threads,y=AMP20C]  {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=ForestGreen, dashed, mark=triangle*]  table[x=threads,y=AMP20P]  {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=Cerulean,    solid,  mark=o]          table[x=threads,y=AMP50C]  {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=Cerulean,    dashed, mark=triangle*]  table[x=threads,y=AMP50P]  {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=Plum,        solid,  mark=o]          table[x=threads,y=AMP100C] {data/abs/monitor_loop_abs.dat};
+			\addplot+[color=Plum,        dashed, mark=triangle*]  table[x=threads,y=AMP100P] {data/abs/monitor_loop_abs.dat};
+			
+			\legend{AMP10C, AMP10P, AMP20C, AMP20P, AMP50C, AMP50P, AMP100C, AMP100P}
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Absolute \texttt{monitor\_loop()} overhead during \SI{100}{\second} period for all 32 CPUs.}
+	\label{fig:monitor-loop-abs}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+	\begin{axis}[overhead plot,	ylabel = {Absolute Time [\si{\second}]}]
+		\addplot+[color=OrangeRed,   solid,  mark=o]          table[x=threads,y=AMP10C]  {data/abs/commander_loop_abs.dat};
+		\addplot+[color=OrangeRed,   dashed, mark=triangle*]  table[x=threads,y=AMP10P]  {data/abs/commander_loop_abs.dat};
+		\addplot+[color=ForestGreen, solid,  mark=o]          table[x=threads,y=AMP20C]  {data/abs/commander_loop_abs.dat};
+		\addplot+[color=ForestGreen, dashed, mark=triangle*]  table[x=threads,y=AMP20P]  {data/abs/commander_loop_abs.dat};
+		\addplot+[color=Cerulean,    solid,  mark=o]          table[x=threads,y=AMP50C]  {data/abs/commander_loop_abs.dat};
+		\addplot+[color=Cerulean,    dashed, mark=triangle*]  table[x=threads,y=AMP50P]  {data/abs/commander_loop_abs.dat};
+		\addplot+[color=Plum,        solid,  mark=o]          table[x=threads,y=AMP100C] {data/abs/commander_loop_abs.dat};
+		\addplot+[color=Plum,        dashed, mark=triangle*]  table[x=threads,y=AMP100P] {data/abs/commander_loop_abs.dat};
+		
+		\legend{AMP10C, AMP10P, AMP20C, AMP20P, AMP50C, AMP50P, AMP100C, AMP100P}
+	\end{axis}
+\end{tikzpicture}
+\caption{Absolute \texttt{commander\_loop()} overhead during \SI{100}{\second} period.}
+\label{fig:commander-loop-abs}
+\end{figure}
+
+\addplot+[color=black, mark=asterisk, only marks] coordinates {(STA100, 2707.0603)};
+\addplot+[color=black, mark=+, only marks] coordinates {(AMP10, 1955.1869)};
+\addplot+[color=black, mark=Mercedes star, only marks] coordinates {(AMP20, 1956.5676)};
+\addplot+[color=black, mark=x, only marks] coordinates {(AMP50, 1965.1045)};
+\addplot+[color=black, mark=Mercedes star flipped, only marks] coordinates {(AMP100, 1965.4307)};
+\addplot+[color=black, mark=star, only marks] coordinates {(EEVDF, 1822.7732)};
+
+\addlegendimage{BlueGreen, mark=asterisk, only marks}
+		\addlegendimage{OrangeRed, mark=+, only marks}
+		\addlegendimage{ForestGreen, mark=Mercedes star, only marks}
+		\addlegendimage{Cerulean, mark=x, only marks}
+		\addlegendimage{Plum, mark=Mercedes star flipped, only marks}
+		\addlegendimage{Goldenrod, mark=star, only marks}
+		
+		\legend{STA100, AMP10, AMP20, AMP50, AMP100, EEVDF}

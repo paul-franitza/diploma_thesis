@@ -56,3 +56,57 @@
 %   see: https://mirror.physik.tu-berlin.de/pub/CTAN/macros/latex/contrib/koma-script/doc/scrguide.pdf
 \addtokomafont{disposition}{\rmfamily}
 
+% --- OWN ---
+\pgfplotsset{
+	baseline boxplot/.style = {
+		boxplot/draw direction = y,
+		boxplot/whisker range  = 1.5,
+		xtick                  = \empty,
+		ymajorgrids            = true,
+		height 				   = 5.8cm,
+		width				   = 8cm,
+		legend columns         = -1,
+		legend to name         = boxplotlegend,
+		legend style           = {font=\small},
+	}
+}
+
+\pgfplotsset{
+	cpu plot/.style = {
+		ybar,
+		ymajorgrids = true,
+		bar width = 5pt,
+		width = 0.485\linewidth, height = 7cm,
+		symbolic x coords = {2, 4, 8},
+		xtick = data,
+		xlabel = {CPUs},
+		enlarge x limits = 0.25,
+		legend style = {legend columns=3, font=\footnotesize}
+	}
+}
+
+\pgfplotsset{
+	para plot/.style = {
+		ybar,
+		ymajorgrids = true,
+		bar width = 5pt,
+		width = 0.485\linewidth, height = 7cm,
+		symbolic x coords = {Under, Full, Over},
+		xtick = data,
+		xlabel = {Load},
+		enlarge x limits = 0.25,
+		legend style = {legend columns=3, font=\footnotesize}
+	}
+}
+
+\pgfplotsset{
+	overhead plot/.style = {
+		grid = major,
+		width = 11.2cm, height = 4.3cm,
+		xtick = {10,100,500,1000,2000},
+		ymin = 0,
+		xmin = 10,
+		xmax = 2000,
+	}
+}
+

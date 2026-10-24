@@ -1,74 +1,389 @@
-% This file was created with JabRef 2.9.2.
-% Encoding: UTF-8
+% --- Introduction ---
 
-@INPROCEEDINGS{becher04:_feurig_hacken_mit_firew,
-    author = {Michael Becher and Maximillian Dornseif},
-    title = {{Feuriges Hacken - Spaß mit Firewire}},
-    booktitle = {21C3: Proceedings of the 21st Chaos Communication Congress},
-    date = {2004-12}
+% --- Related Work ---
+
+@misc{linux-internals-loadbalancing,
+	author       = {{Linux Kernel Internals}},
+	title        = {Load Balancing},
+	url			 = {https://kernel-internals.org/sched/load-balancing},
+	urldate      = {2026-08-11},
+	year         = {2026}
 }
 
-@CONFERENCE{bellard2005qfa,
-    author = {Fabrice Bellard},
-    title = {{QEMU, a fast and portable dynamic translator}},
-    booktitle = {Proceedings of the USENIX Annual Technical Conference, FREENIX Track},
-    date = {2005},
-    pages = {41--46}
+@inproceedings{wasted_cores,
+	author = {Lozi, Jean-Pierre and Lepers, Baptiste and Funston, Justin and Gaud, Fabien and Qu\'{e}ma, Vivien and Fedorova, Alexandra},
+	title = {The Linux scheduler: a decade of wasted cores},
+	year = {2016},
+	isbn = {9781450342407},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/2901318.2901326},
+	doi = {10.1145/2901318.2901326},
+	booktitle = {Proceedings of the Eleventh European Conference on Computer Systems},
+	articleno = {1},
+	numpages = {16},
+	location = {London, United Kingdom},
+	series = {EuroSys '16}
 }
 
-@INPROCEEDINGS{boileau06,
-    author = {Adam Boileau},
-    title = {{Hit by a Bus: Physical Access Attacks with Firewire}},
-    booktitle = {RUXCON},
-    date = {2006}
+@inproceedings{cfs_vs_ule,
+	author = {Bouron, Justinien and Chevalley, Sebastien and Lepers, Baptiste and Zwaenepoel, Willy and Gouicem, Redha and Lawall, Julia and Muller, Gilles and Sopena, Julien},
+	title = {The battle of the schedulers: FreeBSD ULE vs. Linux CFS},
+	year = {2018},
+	isbn = {9781931971447},
+	publisher = {USENIX Association},
+	address = {USA},
+	booktitle = {Proceedings of the 2018 USENIX Conference on Usenix Annual Technical Conference},
+	pages = {85–96},
+	numpages = {12},
+	location = {Boston, MA, USA},
+	series = {USENIX ATC '18}
 }
 
-@BOOK{frederick95,
-    author = {Brooks,Jr., Frederick P.},
-    title = {The mythical man-month (anniversary ed.)},
-    date = {1995},
-    publisher = {Addison-Wesley Longman Publishing Co., Inc.},
-    location = {Boston, MA, USA},
-    isbn = {0-201-83595-9}
+@book{windows_internals,
+	author = {Yosifovich, Pavel and Russinovich, Mark E. and Solomon, David A. and Ionescu, Alex},
+	title = {Windows Internals, Part 1: System architecture, processes, threads, memory management, and more (7th Edition)},
+	year = {2017},
+	isbn = {0735684189},
+	publisher = {Microsoft Press},
+	address = {USA},
+	edition = {7th}
 }
 
-@ARTICLE{collins97a,
-    author = {Robert R. Collins},
-    title = {{In-Circuit Emulation: How the Microprocessor Evolved Over Time}},
-    date = {1997-09},
-    journal = {Dr. Dobbs Journal}
+@misc{clr_inside_out,
+	author       = {Duffy, Joe},
+	title        = {CLR Inside Out: Using Concurrency for Scalability},
+	year         = {2006},
+	howpublished = {\url{https://learn.microsoft.com/en-us/archive/msdn-magazine/2006/september/clr-inside-out-using-concurrency-for-scalability}},
+	note         = {Accessed: 29.01.2026 11:39},
+	url          = {https://learn.microsoft.com/en-us/archive/msdn-magazine/2006/september/clr-inside-out-using-concurrency-for-scalability}
 }
 
-@ARTICLE{feske07,
-    author = {Norman Feske},
-    title = {{A case study on the cost and benefit of dynamic RPC marshalling
-	for low-level system components}},
-    date = {2007},
-    volume = {41},
-    number = {4},
-    pages = {40--48},
-    issn = {0163-5980},
-    doi = {http://doi.acm.org/10.1145/1278901.1278908},
-    journal = {SIGOPS Operating Systems Review},
-    location = {New York, NY, USA},
-    publisher = {ACM}
+@INPROCEEDINGS{faster-core-first,
+	author={Li, Tong and Baumberger, Dan and Koufaty, David A. and Hahn, Scott},
+	booktitle={SC '07: Proceedings of the 2007 ACM/IEEE Conference on Supercomputing}, 
+	title={Efficient operating system scheduling for performance-asymmetric multi-core architectures}, 
+	year={2007},
+	volume={},
+	number={},
+	pages={1-11},
+	keywords={Operating systems;Processor scheduling;Linux;Throughput;Costs;Hardware;Load management;Kernel;Clocks;Measurement},
+	doi={10.1145/1362622.1362694}
 }
 
-@ONLINE{green04,
-    author = {Tom Green},
-    title = {{1394 Kernel Debugging Tips and Tricks}},
-    date = {2004},
-    url = {http://download.microsoft.com/download/1/8/f/18f8cee2-0b64-41f2-893d-a6f2295b40c8/DW04001_WINHEC2004.ppt},
-    note = {Slide presentation at the WinHEC 2004},
-    urldate = {2009-06-03}
+@article{hass-scheduling,
+	author = {Shelepov, Daniel and Saez Alcaide, Juan Carlos and Jeffery, Stacey and Fedorova, Alexandra and Perez, Nestor and Huang, Zhi Feng and Blagodurov, Sergey and Kumar, Viren},
+	title = {HASS: a scheduler for heterogeneous multicore systems},
+	year = {2009},
+	issue_date = {April 2009},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {43},
+	number = {2},
+	issn = {0163-5980},
+	url = {https://doi.org/10.1145/1531793.1531804},
+	doi = {10.1145/1531793.1531804},
+	journal = {SIGOPS Oper. Syst. Rev.},
+	month = apr,
+	pages = {66–75},
+	numpages = {10},
+	keywords = {architectural signatures, asymmetric, heterogeneous, multicore, scheduling}
 }
 
-@PATENT{patent:4819234,
-    author = {Huber, William S.},
-    title = {Operating system debugger},
-    number = {4819234},
-    date = {1989-04},
-    location = {Needham, MA},
-    url = {http://www.freepatentsonline.com/4819234.html}
+@inproceedings{bias-scheduling,
+	author = {Koufaty, David and Reddy, Dheeraj and Hahn, Scott},
+	title = {Bias scheduling in heterogeneous multi-core architectures},
+	year = {2010},
+	isbn = {9781605585772},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/1755913.1755928},
+	doi = {10.1145/1755913.1755928},
+	booktitle = {Proceedings of the 5th European Conference on Computer Systems},
+	pages = {125–138},
+	numpages = {14},
+	keywords = {scheduling, heterogeneous architectures},
+	location = {Paris, France},
+	series = {EuroSys '10}
 }
 
+@inproceedings{pie,
+	author = {Van Craeynest, Kenzo and Jaleel, Aamer and Eeckhout, Lieven and Narvaez, Paolo and Emer, Joel},
+	title = {Scheduling heterogeneous multi-cores through Performance Impact Estimation (PIE)},
+	year = {2012},
+	isbn = {9781450316422},
+	publisher = {IEEE Computer Society},
+	address = {USA},
+	booktitle = {Proceedings of the 39th Annual International Symposium on Computer Architecture},
+	pages = {213–224},
+	numpages = {12},
+	location = {Portland, Oregon},
+	series = {ISCA '12}
+}
+
+@INPROCEEDINGS{global-dynamic-load-balancing,
+	author={Tan, Qinyun and Xiao, Kun and He, Wen and Lei, Pinyuan and Chen, Lirong},
+	booktitle={2021 7th International Symposium on System and Software Reliability (ISSSR)}, 
+	title={A Global Dynamic Load Balancing Mechanism with Low Latency for Micokernel Operating System}, 
+	year={2021},
+	volume={},
+	number={},
+	pages={178-187},
+	keywords={Multicore processing;Operating systems;Load management;Throughput;Real-time systems;Timing;Software reliability;microkernel;load balance;low-latency;multi-core;high-performance},
+	doi={10.1109/ISSSR53171.2021.00026}}
+
+@MISC{qnx-amp,
+	author       = {{QNX}},
+	title        = {QNX Developers Documentation - Asymmetric Multiprocessing},
+	year         = {2026},
+	url			 = {https://qnx.com/developers/docs/7.1/com.qnx.doc.neutrino.sys_arch/topic/smp_AMP.html},
+	urldate      = {2026-08-10},
+}
+
+@inproceedings{omnire,
+	author = {Kuang, Jilong and Waddington, Daniel G. and Tian, Chen},
+	title = {Towards a scalable microkernel personality for multicore processors},
+	year = {2013},
+	isbn = {9783642400469},
+	publisher = {Springer-Verlag},
+	address = {Berlin, Heidelberg},
+	url = {https://doi.org/10.1007/978-3-642-40047-6_62},
+	doi = {10.1007/978-3-642-40047-6_62},
+	booktitle = {Proceedings of the 19th International Conference on Parallel Processing},
+	pages = {620–632},
+	numpages = {13},
+	location = {Aachen, Germany},
+	series = {Euro-Par'13}
+}
+
+@article{philipp-thesis,
+	author = {Eppelt, Philipp},
+	year = {2016},
+	month = {02},
+	title = {Behaviour-Aware Load Balancing	for a Micro-Kernel}
+}
+
+% --- State ---
+
+@article{core-dumps,
+	author = {Franitza, Paul},
+	year = {2025},
+	month = {07},
+	title = {Core Dumps in the L4Re Framework}
+}
+
+@MISC{IntroMOSlecture,
+	author       = {Bierbaum, Jan and Weinhold, Carsten},
+	title        = {Microkernel-based Operating Systems - Introduction},
+	note         = {Lecture at Dresden University of Technology},
+	year         = {2023},
+	month        = oct,
+	howpublished = {In-person lecture},
+	url			 = {https://os.inf.tu-dresden.de/Studium/MOS/WS2024/01-Introduction.pdf},
+}
+
+@MISC{l4re,
+	author       = {{Kernkonzept GmbH}},
+	title        = {L4Re - The L4 Runtime Environment},
+	year         = {2024},
+	url			 = {https://l4re.org},
+	urldate      = {2026-07-19},
+}
+
+@MISC{IPCMOSlecture,
+	author       = {Asmussen, Nils},
+	title        = {Microkernel-based Operating Systems - IPC},
+	note         = {Lecture at Dresden University of Technology},
+	year         = {2023},
+	month        = sep,
+	howpublished = {In-person lecture},
+	url			 = {https://os.inf.tu-dresden.de/Studium/MOS/WS2024/02-IPC.pdf},
+}
+
+@BOOK{ostep,
+	author =       {Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau},
+	title =        "{Operating Systems: Three Easy Pieces}",
+	publisher =    {Arpaci-Dusseau Books},
+	month =        "November",
+	year =         {2023},
+	edition =      {1.10},
+}
+
+@INPROCEEDINGS{cfs,
+	author={Wong, C.S. and Tan, I.K.T. and Kumari, R.D. and Lam, J.W. and Fun, W.},
+	booktitle={2008 International Symposium on Information Technology}, 
+	title={Fairness and interactive performance of O(1) and CFS Linux kernel schedulers}, 
+	year={2008},
+	volume={4},
+	number={},
+	pages={1-8},
+	keywords={Pediatrics;Kernel;Linux;Sleep;Bandwidth;Mathematical model;Equations},
+	doi={10.1109/ITSIM.2008.4631872}
+}
+
+@misc{eevdf,
+	author       = {{Linux Kernel Internals}},
+	title        = {Scheduler Evolution: O(1) {\(\to\)} CFS {\(\to\)} EEVDF},
+	howpublished = {\url{https://kernel-internals.org/sched/scheduler-evolution/}},
+	urldate      = {2026-08-03},
+	organization = {laveeshb/linux-kernel-internals (GitHub)}
+}
+
+@article{rr-scheduling,
+	author = {Kleinrock, Leonard},
+	title = {Analysis of A time-shared processor},
+	journal = {Naval Research Logistics Quarterly},
+	volume = {11},
+	number = {1},
+	pages = {59-73},
+	doi = {https://doi.org/10.1002/nav.3800110105},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/nav.3800110105},
+	eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/nav.3800110105},
+	year = {1964}
+}
+
+@article{load-balancing,
+	author = {Alakeel, Ali},
+	year = {2009},
+	month = {11},
+	pages = {},
+	title = {A Guide to Dynamic Load Balancing in Distributed Computer Systems},
+	volume = {10},
+	journal = {International Journal of Computer Science and Network Security (IJCSNS)}
+}
+
+@article{acm-loadbalancing-algos,
+	author = {Davis, Robert I. and Burns, Alan},
+	title = {A survey of hard real-time scheduling for multiprocessor systems},
+	year = {2011},
+	issue_date = {October 2011},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {43},
+	number = {4},
+	issn = {0360-0300},
+	url = {https://doi.org/10.1145/1978802.1978814},
+	doi = {10.1145/1978802.1978814},
+	journal = {ACM Comput. Surv.},
+	month = oct,
+	articleno = {35},
+	numpages = {44},
+	keywords = {partitioned scheduling, multiprocessor, multicore, global scheduling, Hard real-time scheduling}
+}
+
+@article{semi-np-hardness,
+	author = {Johnson, David},
+	year = {2010},
+	month = {08},
+	pages = {},
+	title = {Near-Optimal Bin Packing Algorithms}
+}
+
+@misc{arm_big_little_2026,
+	author       = {{Arm Ltd.}},
+	title        = {big.LITTLE: Balancing Power Efficiency and Performance},
+	year         = {2026},
+	urldate      = {2026-07-22},
+	url          = {https://www.arm.com/technologies/big-little}
+}
+
+@misc{amd_zen_core_2026,
+	author       = {{AMD}},
+	title        = {{\enquote{Zen} Core Architecture}},
+	year         = {2026},
+	urldate      = {2026-07-22},
+	url          = {https://www.amd.com/en/technologies/zen-core.html}
+}
+
+@misc{intel_hybrid_architecture_2026,
+	author       = {{Intel Corporation}},
+	title        = {Hybrid Architecture},
+	year         = {2026},
+	urldate      = {2026-07-22},
+	url          = {https://www.intel.com/content/www/us/en/developer/articles/technical/hybrid-architecture.html}
+}
+
+% --- Design ---
+
+@article{use_method_gregg,
+	author = {Brendan Gregg},
+	title = {Thinking Methodically about Performance},
+	year = {2012},
+	issue_date = {December 2012},
+	publisher = {Association for Computing Machinery},
+	volume = {10},
+	number = {12},
+	issn = {1542-7730},
+	journal = {Queue}
+}
+
+@manual{intel-cpuid,
+	title        = {{Intel}® 64 and {IA-32} Architectures Software Developer's Manual, Combined Volumes 2A, 2B, 2C, and 2D: Instruction Set Reference, A-Z},
+	author       = {{Intel Corporation}},
+	year         = {2026},
+	note         = {Order Number: 325383},
+	url          = {https://cdrdv2.intel.com/v1/dl/getContent/671110},
+	urldate      = {2026-07-16}
+}
+
+% --- Implementation ---
+
+@article{priority-inheritance-protocols,
+	author={Sha, L. and Rajkumar, R. and Lehoczky, J.P.},
+	journal={IEEE Transactions on Computers}, 
+	title={Priority inheritance protocols: an approach to real-time synchronization}, 
+	year={1990},
+	volume={39},
+	number={9},
+	pages={1175-1185},
+	doi={10.1109/12.57058}
+}
+
+@incollection{binpacking,
+	author    = {Martello, Silvano and Toth, Paolo},
+	title     = {Bin-packing problem},
+	booktitle = {Knapsack Problems: Algorithms and Computer Implementations},
+	year      = {1990},
+	publisher = {John Wiley and Sons},
+	address   = {Chichester, UK},
+	isbn      = {0471924202},
+	url       = {https://web.archive.org/web/20060508092838/http://www.or.deis.unibo.it/kp/Chapter8.pdf},
+}
+
+% --- Evaluation ---
+
+@article{pareto_principle,
+	title={Power laws, Pareto distributions and Zipf’s law},
+	volume={46},
+	ISSN={1366-5812},
+	url={http://dx.doi.org/10.1080/00107510500052444},
+	DOI={10.1080/00107510500052444},
+	number={5},
+	journal={Contemporary Physics},
+	publisher={Informa UK Limited},
+	author={Newman, MEJ},
+	year={2005},
+	month=Sept, pages={323–351}
+}
+
+@article{amdahls_law,
+	author = {Rodgers, David P.},
+	title = {Improvements in multiprocessor system design},
+	year = {1985},
+	issue_date = {June 1985},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {13},
+	number = {3},
+	issn = {0163-5964},
+	url = {https://doi.org/10.1145/327070.327215},
+	doi = {10.1145/327070.327215},
+	journal = {SIGARCH Comput. Archit. News},
+	month = jun,
+	pages = {225–231},
+	numpages = {7}
+}
+
+% --- Future Work ---
+
+% --- Conclusion ---

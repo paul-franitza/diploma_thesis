@@ -1,9 +1,100 @@
 \chapter{Future Work}
 \label{sec:futurework}
 
-\ldots future work \ldots
+This chapter explores future directions for the work done in this thesis.
+Section~\ref{sec:design-extensions} presents extensions to the current design that would improve the balancing strategy.
+This can be achieved either through the adjustment of the policy itself or by incorporating more hardware information into the decision.
+In Section~\ref{sec:optimizations}, software optimizations and the efficient use of caches are discussed.
 
-\todo{write future work}
+\section{Design Extensions}
+\label{sec:design-extensions}
+
+\subsection{Balancing Behavior}
+
+\paragraph{Real-Time Balancing.}
+
+The load balancer is currently following a best-effort policy (see Section~\ref{sec:best-effort}) because it can easily be shown that threads with a high priority will be suspended, although they could run on a different CPU.
+This behavior does not preserve the real-time characteristics of the L4Re operating system framework.
+Although enabling migrations in a real-time system introduces overhead that must be accounted for in the worst-case execution time, it preserves the assumption that a thread is always able to run when it is technically possible to run it at its given priority.
+
+\paragraph{Fairness.}
+
+Especially when no real-time strategy is employed but rather a best-effort balancer, one optimization goal could be fairness (see Section~\ref{sec:best-effort}).
+Currently this goal is not regarded, but it could be added by tracking the time a thread has spent in the system and comparing it to the time it was running.
+Doing so, the load balancer could weigh threads of the same priority to receive equal portions of processing time.
+A thread could, therefore, receive two kinds of priorities.
+The first one being the actual scheduling priority and the second one being a fairness value preferring it over other threads of the same priority when making a migration decision.
+This would align with the concept of priority-based scheduling but could avoid cases of unequal processing time, as can be seen in Figure~\ref{fig:para-runtime-distr} of the appendix.
+
+\paragraph{\texttt{Vload} Inertia.}
+
+Section~\ref{sec:cpu-scalability} discusses the phenomenon that the scheduling proxy piles threads onto one CPU during the placement decision in \texttt{run\_thread()}.
+It becomes most visible in Figure~\ref{fig:para-runtime-distr} of the appendix in the overload case at the bottom.
+The STA100 balancer has a significantly faster execution time for most instances, although the total runtime for all threads is much slower (see Section~\ref{sec:para-execution}).
+The first spawned benchmarks are piled onto one CPU, but because there are always 64 instances, the following ones have less-loaded CPUs available for their computation, drastically reducing their runtime.
+The asynchronous updates of \texttt{vload} by the commander or monitors introduce an inertial effect for which the proxy has no way of accounting.
+The solution to this problem could be to immediately add a default margin to the \texttt{vload} of the CPU at which the new thread is placed.
+Although this would solve the problem of outdated virtual load information for the proxy, it could introduce arbitrary changes of \texttt{vload} during the balancing process for the commander.
+Further, the solution is also racy in the sense that the proxy addition could immediately be overwritten by the monitor updating the virtual load according to its monitoring cycle, undermining the intended effect.
+It remains to be investigated how this problem can be solved in this concurrent distributed load balancer.
+
+\subsection{Hardware Aware Balancing}
+
+\paragraph{Advanced Topology.}
+
+The load balancer presented in this thesis scans the CPU topology to gain information about heterogeneous cores (see Section~\ref{sec:cpu-performance}), but uniform memory access is assumed.
+Hence, there is unexplored potential in the topology itself because cache hierarchies are not read and architectures such as NUMA are not regarded.
+Utilizing caches and memory bandwidths and being aware of the full hardware structure are crucial for fast and efficient execution because they can make use of the principle of locality.
+
+\paragraph{CPU Performance Scaling.}
+
+The microbenchmark executed during the start up of the load balancer (see Section~\ref{sec:cpu-performance}) tests simple multiplication and addition operations.
+However, modern CPUs consist of multiple acceleration units that speed up the processing of different kinds of instructions (FPU, SVE, and SME), but they also allow for parallelism when operating on multiple registers at once (SIMD, SSE, and AVX).
+Not only are the current benchmarks insufficient to measure the whole CPU, but additionally, the result of the measurements cannot be represented by a single scaling value.
+It would require an enhanced design testing multiple accelerators and further representing them in a scaling vector that represents fine-grained information about different processing units.
+It needs to be mentioned that even with a detailed report of every CPU, the performance of each can be scaled by hardware at any time because of power or heat management.
+Hence, the gained information does not necessarily apply to the current state of the hardware.
+
+\paragraph{Thread Behavior Awareness.}
+
+The concept of scaling CPU compute performance breaks the AMP structure of the CPU down to a symmetric one.
+As stated in Section~\ref{sec:cpu-performance}, this method works against the concept of having AMP in the first place.
+The metric of preemptions (see Section~\ref{sec:des:loba}) was originally introduced to categorize whether threads are compute- or input-output heavy.
+Only later were they used to calculate \texttt{vload}, inevitably leaving a gap for determining the behavior of a thread.
+Having insight into the kind of processing a thread performs becomes consequential when combined with the previously discussed CPU performance scaling.
+It enables the load balancer to move a thread with a distinct behavior profile to a CPU that is structurally beneficial for its execution.
+
+\section{Optimizations}
+\label{sec:optimizations}
+
+\paragraph{Batched System Call.}
+
+Section~\ref{sec:impl:bached-stats} explains the idea of an extended \texttt{stats\_time} system call that requests multiple thread stats at once.
+Next to the decision of where to implement that functionality, it would require a protocol that clarifies the information transfer.
+Threads can still be absent from the CPU they are currently probed on because of either exiting entirely or being in migration transit.
+The protocol would need to define a system on how to handle such cases.
+Further, the scenario of IPC errors would need to be covered.
+If a single thread on a CPU cannot be probed, it is negligible, but if up to 30 threads are not probed, it causes inaccuracies during \texttt{vload} calculation.
+
+\paragraph{Capability Comparison.}
+
+The overhead of the thread capability comparison with \texttt{cap\_equal\_no\_rights()} during \texttt{run\_thread()} does not seem severe (see Section~\ref{sec:overhead-analysis}).
+However, it can quickly slow down processing done on CPU1 because the system calls for comparing thread capabilities scale linearly with the number of threads.
+If there is a high thread count that the load balancer needs to keep track of and threads are rescheduled often, a constant runtime for \texttt{run\_thread()} is desired.
+To avoid those system calls, a mechanism is needed that can either compare them in userland or make comparing obsolete.
+It is difficult to do so because because, as explained in Section~\ref{sec:impl:cap-slots}, capabilities are just array indices into the capability table rather than the actual object.
+Therefore, this problem may be unsolvable for a load balancer running in the user-space environment of L4Re.
+
+\paragraph{Cache Usage.}
+
+This work does not investigate what influence the caching behavior of the load balancer components has on performance.
+Caches are one of the prime primitives to make execution fast.
+Inefficient cache use can have dramatic effects on processing speed.
+If two threads on different CPUs alternately modify the same data, this leads to the cache line being invalidated and reloaded repeatedly.
+Additionally, if data structures are not aligned correctly, this can lead to poor performance because of cache bouncing.
+The commander and proxy are always working with the data provided by the monitors.
+If the commander and proxy were to invalidate the data cached by the monitors, this would yield poor execution speed.
+Investigating such behavior and improving it by properly aligning structures in memory as well as coordinating access patterns could potentially result in less overhead introduced by the load balancer.
 
 \cleardoublepage
 

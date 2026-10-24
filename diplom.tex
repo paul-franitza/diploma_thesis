@@ -25,9 +25,9 @@ pdfborder={0.75 0.75 1},
 hidelinks,
 plainpages=false,pdfpagelabels=true]{hyperref}
 \hypersetup{%
-  pdftitle={Dein Titel},
-  pdfauthor={Otto Mustermann},
-  pdfkeywords={foo, bar},
+  pdftitle={Load Balancing in the L4Re Operating System Framework},
+  pdfauthor={Paul Franitza},
+  pdfkeywords={Operting Systems, Load Balancing, Scheduling},
 }
 
 \input{preamble/packages.tex}
@@ -46,10 +46,11 @@ plainpages=false,pdfpagelabels=true]{hyperref}
 
 \input{content/00_title.tex}
 
-\includepdf{images/diplom-aufgabe.pdf}
+\includepdf[pages={1-}]{images/diplom-aufgabe-paul-franitza.pdf}
+
 \cleardoublepage
 
-\input{content/01_disclaimer.tex}
+%\input{content/01_disclaimer.tex}
 
 % NOTE: if you selected british or american above, change that here too
 \selectlanguage{english}
@@ -60,18 +61,22 @@ plainpages=false,pdfpagelabels=true]{hyperref}
 
 \cleardoublepage
 
+\include{content/03_acknowledgments}
+
+\cleardoublepage
+
 \tableofcontents
 
 \cleardoublepage
 
-% remove this on final
-\listoftodos
-\cleardoublepage
-
 \listoffigures
-\cleardoublepage
 
-\listoftables
+\begingroup
+	\let\clearpage\relax
+	\vspace{-1cm}
+	\listoftables
+\endgroup
+
 \cleardoublepage
 
 \pagenumbering{arabic}
@@ -85,7 +90,9 @@ plainpages=false,pdfpagelabels=true]{hyperref}
 \include{content/60_futurework}
 \include{content/70_conclusion}
 
+
 \appendix
+\include{content/80_appendix}
 
 %\addchap{Glossar}
 

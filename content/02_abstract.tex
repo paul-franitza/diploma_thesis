@@ -8,7 +8,22 @@
 % geben (für irgendetwas müssen die Betreuer ja auch noch da
 % sein).
 
-\ldots abstract \ldots
+Modern hardware increasingly combines processor cores of varying types and speeds on a single chip (asymmetric multiprocessing, or AMP).
+However, the L4Re operating system framework does not provide CPU load balancing.
+Threads need to be statically assigned to cores by the applications themselves.
+This approach aligns with the microkernel philosophy of separating mechanism from policy, but it leaves the question of AMP-aware, dynamic thread placement unaddressed.
+
+This thesis proposes a user-level load balancing service for L4Re on x86-64 that distributes threads across physical cores during runtime.
+It respects application-supplied constraints, such as thread pinning, core-sharing restrictions, and the placement requirements of virtual machine vCPUs.
+The design adheres to L4Re's proxy pattern: a scheduling proxy intercepts scheduler calls, per-CPU monitoring threads track system state, and a commander thread performs periodic rebalancing based on virtual load (vload), a preemption-based metric capturing both CPU utilization and saturation.
+AMP awareness is achieved by scaling the vload of each CPU according to its measured compute performance.
+Realizing the design required extending the L4Re microkernel with three new interfaces for capability comparison, thread probing, and pinned scheduling.
+
+The resulting load balancer is evaluated against the Linux EEVDF scheduler using ported CPU-bound benchmarks across baseline, scalability, and parallel-load scenarios while its own monitoring overhead is measured directly.
+It is imperative to implement periodic rebalancing procedures, as a non-rebalancing variant trails by a factor of two to four due to a pile-on effect from stale load information.
+The rebalancing configurations remain within a narrow range of each other, irrespective of the monitoring interval.
+They introduce a monitoring overhead of less than 1\,\% and approach EEVDF's throughput within approximately 2--7\,\% percent.
+This demonstrates that AMP-aware load balancing is achievable as a policy-separated userland service at a modest cost relative to a mature monolithic scheduler.
 
 %%% Local Variables:
 %%% TeX-master: "diplom"

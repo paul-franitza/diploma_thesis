@@ -1,4 +1,4 @@
-\chapter{Conclusion And Outlook}
+\chapter{Conclusion}
 \label{sec:conclusion}
 
 %  Schlußfolgerungen, Fragen, Ausblicke
@@ -16,9 +16,25 @@
 % weitsichtig man doch ist. Dieses Kapitel muß kurz sein, damit es
 % gelesen wird.
 
-\ldots conclusion \ldots
+This thesis presented a load balancing service for the L4Re userland on asymmetric hardware.
+The AMP awareness was addressed by scaling CPU performance as described in Section~\ref{sec:cpu-performance}.
+This mechanism alone is insufficient for balancing threads because it corrects the differences between cores, but it does not indicate how loaded a core already is.
+Therefore, a preemption-based virtual load metric was introduced that captures CPU utilization and saturation (see Section~\ref{sec:des:loba}).
+Implementing the load balancing component into the L4Re environment required a series of kernel interface extensions for capability comparison (Section~\ref{sec:impl:proxy}), thread probing (Section~\ref{sec:probing}), and pinning threads (Section~\ref{sec:thread-groups}), because a userland application cannot rely on the omniscience an operating system kernel has.
+That the load balancer must reside in user space gave rise to problems never encountered by a kernel scheduler.
+It is subject to preemption, stale, or partial system-state information, and it requires careful orchestration of the monitor, proxy, and commander threads (see Section~\ref{sec:distributed-system}).
 
-\todo{write conclusion}
+The developed system was compared against Linux's EEVDF scheduler using a custom benchmarking methodology, and various system configurations were additionally measured for runtime overhead with a dedicated benchmarking harness (Chapter~\ref{sec:evaluation}).
+The results show that periodic rebalancing is essential.
+The static balancer STA100, which placed threads only at creation time without rebalancing them, trailed the rebalancing configurations by two to four times the runtime, whereas for the AMP configurations, the length of the monitoring interval had comparatively little effect on performance.
+All rebalancing configurations remained within a narrow window of each other, and their monitoring overheads stayed under a fraction of a percent even at the shortest interval tested.
+However, no configuration developed throughout this thesis could match the throughput of EEVDF, which held an edge of two to seven percent over all AMP variants in normalized runtime in Section~\ref{sec:cpu-scalability} and~\ref{sec:para-execution} and produced much lower variance between individual benchmark run times.
+This gap is best understood as a consequence of the microkernel philosophy enforced by L4Re and userland balancing under partial information.
+The AMP variants are not able to match a kernel scheduler with unrestricted, synchronous, and thorough access to the system state, let alone the years of engineering that went into its development.
+
+The findings of this work show that the mechanism and policy separation central to the design of L4Re does allow for AMP-aware load balancing, with the load balancers developed in this thesis achieving performance close to an established monolithic scheduler.
+Additional overhead is introduced for coordinating a userland-implemented, distributed scheduling component.
+The evaluation identified a concrete limitation in \texttt{vload} staleness leading to the observed pile-on effects, and Chapter~\ref{sec:futurework} points to directions for mitigating such behavior in the future.
 
 \cleardoublepage
 

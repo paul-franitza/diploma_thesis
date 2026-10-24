@@ -4,3 +4,15 @@
 
 \newcommand{\NOVA}{NOVA\xspace}
 \newcommand{\QEMU}{QEMU\xspace}
+
+% #1 = value to display, #2 = same value (numeric), #3 = value of the paired row
+\newcommand{\cmpcell}[3]{%
+	\pgfmathsetmacro{\diffpct}{(#2-#3)/#3*100}
+	\pgfmathsetmacro{\intensity}{min(abs(\diffpct)*4, 80)}
+	\pgfmathparse{\diffpct > 0 ? 1 : 0}
+	\ifnum\pgfmathresult=1
+	\cellcolor{Red!\intensity}
+	\else
+	\cellcolor{Green!\intensity}
+	\fi
+}
